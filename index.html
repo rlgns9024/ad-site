@@ -75,20 +75,77 @@
       </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Rich Visual Design -->
     <section class="hero" id="hero">
-      <!-- Video Background (Fallback: Gradient) -->
+      <!-- Multi-layer Gradient Background -->
       <div class="hero__overlay"></div>
 
-      <!-- Hero Content -->
+      <!-- Decorative Background Characters -->
+      <img
+        src="assets/images/hero-bg1.webp"
+        alt="귀여운 캐릭터"
+        class="hero__character hero__character--left"
+      />
+      <img
+        src="assets/images/hero-bg2.webp"
+        alt="귀여운 캐릭터"
+        class="hero__character hero__character--right"
+      />
+
+      <!-- Decorative Elements Container -->
+      <div class="hero__decorations">
+        <!-- Left side floating emoji -->
+        <div class="hero__decoration hero__decoration--emoji left-emoji">😊</div>
+
+        <!-- Right side floating emoji -->
+        <div class="hero__decoration hero__decoration--emoji right-emoji">😍</div>
+
+        <!-- Top left sparkle -->
+        <div class="hero__decoration hero__decoration--sparkle top-left-sparkle">✨</div>
+
+        <!-- Right bottom star -->
+        <div class="hero__decoration hero__decoration--star right-bottom-star">⭐</div>
+
+        <!-- Small cube decoration -->
+        <div class="hero__decoration hero__decoration--cube top-center-cube">💎</div>
+
+        <!-- Heart Balloons - Right Top -->
+        <div class="hero__heart-balloon heart-balloon-1">
+          <span class="heart-balloon__content">❤️</span>
+        </div>
+        <div class="hero__heart-balloon heart-balloon-2">
+          <span class="heart-balloon__content">❤️</span>
+        </div>
+        <div class="hero__heart-balloon heart-balloon-3">
+          <span class="heart-balloon__content">❤️</span>
+        </div>
+
+        <!-- Heart Balloons - Right Middle -->
+        <div class="hero__heart-balloon heart-balloon-4">
+          <span class="heart-balloon__content">💕</span>
+        </div>
+        <div class="hero__heart-balloon heart-balloon-5">
+          <span class="heart-balloon__content">💕</span>
+        </div>
+        <div class="hero__heart-balloon heart-balloon-6">
+          <span class="heart-balloon__content">💕</span>
+        </div>
+
+        <!-- Glow dots -->
+        <div class="hero__glow-dot glow-dot-1"></div>
+        <div class="hero__glow-dot glow-dot-2"></div>
+        <div class="hero__glow-dot glow-dot-3"></div>
+      </div>
+
+      <!-- Hero Content (Text) -->
       <div class="hero__content">
         <div class="hero__content-inner">
           <!-- Eyebrow -->
           <p class="hero__eyebrow" data-aos="fade-up" data-aos-delay="100">
-            이모지 & 특수문자 모음
+            이모지로 즐거운 작업
           </p>
 
-          <!-- Title -->
+          <!-- Main Title -->
           <h1 class="hero__title" data-aos="fade-up" data-aos-delay="200">
             쉽고 빠른 이모지
             <br />
@@ -102,21 +159,12 @@
             한 번의 클릭으로 완벽하게!
           </p>
 
-          <!-- Meta / Stats -->
-          <div class="hero__meta" data-aos="fade-up" data-aos-delay="400">
-            <span class="hero__meta-item">📱 모바일 최적화</span>
-            <span class="hero__meta-dot"></span>
-            <span class="hero__meta-item">⚡ 즉시 복사</span>
-            <span class="hero__meta-dot"></span>
-            <span class="hero__meta-item">🎯 카테고리 정렬</span>
-          </div>
-
           <!-- CTA Buttons -->
-          <div class="hero__buttons" data-aos="fade-up" data-aos-delay="500">
-            <a href="#emoji" class="btn btn--primary">
+          <div class="hero__buttons" data-aos="fade-up" data-aos-delay="400">
+            <a href="#emoji" class="btn btn--primary-gradient">
               😊 이모지 무한 복사하기
             </a>
-            <a href="#trends" class="btn btn--secondary">
+            <a href="#trends" class="btn btn--secondary-glow">
               ✨ 특수문자 트렌드 보기
             </a>
           </div>
@@ -124,7 +172,7 @@
       </div>
 
       <!-- Scroll Indicator -->
-      <div class="hero__scroll" data-aos="fade-up" data-aos-delay="700">
+      <div class="hero__scroll" data-aos="fade-up" data-aos-delay="600">
         <span class="hero__scroll-label">아래로 스크롤</span>
         <div class="hero__scroll-line"></div>
       </div>

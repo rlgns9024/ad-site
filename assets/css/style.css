@@ -3,9 +3,9 @@
   - commons.css의 토큰/유틸을 가져다 실제 UI를 여기서 구성합니다.
 */
 
-/* ========== Hero: Gradient Background / Modern ========== */
+/* ========== Hero: Rich Multi-Color Gradient Background ========== */
 
-/* Hero Background: 보라색 → 주황색 그라데이션 */
+/* Main Hero Container */
 .hero {
   position: relative;
   width: 100vw;
@@ -14,45 +14,357 @@
   display: grid;
   place-items: center;
   isolation: isolate;
-  background: var(--gradient-hero);
+  background: #0a0e27;
 }
 
-@media (max-width: 768px) {
-  .hero {
-    background: var(--gradient-hero-mobile);
-  }
-}
-
-/* Hero Overlay with Animated Elements */
+/* Multi-Layer Gradient Overlay for Rich Color Depth */
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-      180deg,
-      rgba(102, 126, 234, 0.2) 0%,
-      rgba(118, 75, 162, 0.15) 40%,
-      rgba(240, 147, 251, 0.2) 100%
-    ),
-    radial-gradient(
-      circle at 85% 15%,
-      rgba(255, 107, 107, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 15% 85%,
-      rgba(100, 200, 255, 0.2) 0%,
-      transparent 40%
-    );
   z-index: 1;
-  animation: gradientShift 15s ease-in-out infinite;
+  background:
+    /* Base linear gradient: left to right with purple, blue, pink, orange */
+    linear-gradient(
+      135deg,
+      #2d1b5e 0%,
+      #3d2878 15%,
+      #2c5282 25%,
+      #6b4fa1 35%,
+      #b946ef 50%,
+      #ec4899 65%,
+      #f97316 80%,
+      #ea580c 100%
+    );
+  
+  /* Radial gradient: top-left blue/purple glow */
+  background-blend-mode: multiply;
 }
 
-@keyframes gradientShift {
+.hero__overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 600px at 20% 30%,
+    rgba(59, 130, 246, 0.4) 0%,
+    rgba(99, 102, 241, 0.2) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero__overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    /* Bottom-right orange/red glow */
+    radial-gradient(
+      circle 800px at 85% 90%,
+      rgba(249, 115, 22, 0.5) 0%,
+      rgba(234, 88, 12, 0.3) 30%,
+      transparent 60%
+    ),
+    /* Left-bottom cyan glow */
+    radial-gradient(
+      circle 400px at 15% 75%,
+      rgba(34, 211, 238, 0.3) 0%,
+      transparent 50%
+    ),
+    /* Center-top pink glow */
+    radial-gradient(
+      circle 500px at 50% 20%,
+      rgba(236, 72, 153, 0.3) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Soft glow animation */
+@keyframes glowPulse {
   0%, 100% {
-    opacity: 1;
+    opacity: 0.95;
   }
   50% {
-    opacity: 0.95;
+    opacity: 1;
+  }
+}
+
+.hero__overlay {
+  animation: glowPulse 8s ease-in-out infinite;
+}
+
+/* ========== Character Images Positioning ========== */
+.hero__character {
+  position: absolute;
+  z-index: 2;
+  max-width: none;
+}
+
+/* Left bottom character - hero-bg1 */
+.hero__character--left {
+  width: clamp(280px, 35vw, 500px);
+  height: auto;
+  bottom: -80px;
+  left: -120px;
+  animation: floatLeft 6s ease-in-out infinite;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes floatLeft {
+  0%, 100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(-5deg);
+  }
+}
+
+/* Right top character - hero-bg2 */
+.hero__character--right {
+  width: clamp(200px, 28vw, 420px);
+  height: auto;
+  top: -80px;
+  right: -100px;
+  animation: floatRight 7s ease-in-out infinite;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes floatRight {
+  0%, 100% {
+    transform: translateY(0) rotate(8deg);
+  }
+  50% {
+    transform: translateY(30px) rotate(8deg);
+  }
+}
+
+/* ========== Decorative Elements ========== */
+.hero__decorations {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Base decoration style */
+.hero__decoration {
+  position: absolute;
+  font-size: 24px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Emoji decorations */
+.hero__decoration--emoji {
+  font-size: clamp(20px, 4vw, 48px);
+  opacity: 0.85;
+  animation: floatEmoji 5s ease-in-out infinite;
+}
+
+.left-emoji {
+  left: 8%;
+  top: 45%;
+  animation-delay: 0s;
+}
+
+.right-emoji {
+  right: 5%;
+  top: 55%;
+  animation-delay: 1s;
+  font-size: clamp(28px, 5vw, 56px);
+}
+
+@keyframes floatEmoji {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(-12px) rotate(5deg);
+    opacity: 1;
+  }
+}
+
+/* Sparkle decorations */
+.hero__decoration--sparkle {
+  font-size: clamp(18px, 3vw, 36px);
+  animation: sparkleFloat 4s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+.top-left-sparkle {
+  left: 10%;
+  top: 15%;
+  animation-delay: 0.5s;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Star/Cube decorations */
+.hero__decoration--star,
+.hero__decoration--cube {
+  font-size: clamp(16px, 2.5vw, 32px);
+  animation: twinkleStar 3s ease-in-out infinite;
+}
+
+.right-bottom-star {
+  right: 8%;
+  bottom: 20%;
+  animation-delay: 0.3s;
+}
+
+.top-center-cube {
+  left: 50%;
+  top: 10%;
+  transform: translateX(-50%);
+  animation-delay: 1s;
+}
+
+@keyframes twinkleStar {
+  0%, 100% {
+    opacity: 0.7;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(180deg) scale(1.1);
+  }
+}
+
+/* ========== Heart Balloons ========== */
+.hero__heart-balloon {
+  position: absolute;
+  width: clamp(40px, 8vw, 80px);
+  height: clamp(40px, 8vw, 80px);
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.9), rgba(139, 92, 246, 0.85));
+  box-shadow: 
+    inset 0 -5px 15px rgba(0, 0, 0, 0.2),
+    0 8px 20px rgba(168, 85, 247, 0.4),
+    0 0 30px rgba(168, 85, 247, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(20px, 4vw, 40px);
+  animation: floatBalloon 4s ease-in-out infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.heart-balloon__content {
+  display: block;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Heart balloon positions - Right Top */
+.heart-balloon-1 {
+  top: 15%;
+  right: 12%;
+  animation-delay: 0s;
+}
+
+.heart-balloon-2 {
+  top: 22%;
+  right: 5%;
+  width: clamp(35px, 6vw, 65px);
+  height: clamp(35px, 6vw, 65px);
+  animation-delay: 0.5s;
+}
+
+.heart-balloon-3 {
+  top: 12%;
+  right: 22%;
+  width: clamp(50px, 9vw, 90px);
+  height: clamp(50px, 9vw, 90px);
+  animation-delay: 1s;
+}
+
+/* Heart balloon positions - Right Middle */
+.heart-balloon-4 {
+  top: 55%;
+  right: 8%;
+  animation-delay: 0.3s;
+}
+
+.heart-balloon-5 {
+  top: 65%;
+  right: 16%;
+  width: clamp(42px, 7vw, 75px);
+  height: clamp(42px, 7vw, 75px);
+  animation-delay: 0.8s;
+}
+
+.heart-balloon-6 {
+  top: 48%;
+  right: 22%;
+  width: clamp(48px, 8vw, 85px);
+  height: clamp(48px, 8vw, 85px);
+  animation-delay: 1.3s;
+}
+
+@keyframes floatBalloon {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-15px) rotate(-8deg);
+    opacity: 1;
+  }
+}
+
+/* ========== Glow Dots ========== */
+.hero__glow-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  animation: glowBob 3s ease-in-out infinite;
+}
+
+.glow-dot-1 {
+  width: 8px;
+  height: 8px;
+  left: 20%;
+  top: 25%;
+  animation-delay: 0s;
+}
+
+.glow-dot-2 {
+  width: 6px;
+  height: 6px;
+  right: 15%;
+  top: 35%;
+  animation-delay: 0.7s;
+}
+
+.glow-dot-3 {
+  width: 5px;
+  height: 5px;
+  left: 75%;
+  bottom: 25%;
+  animation-delay: 1.4s;
+}
+
+@keyframes glowBob {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 1;
   }
 }
 
@@ -79,16 +391,44 @@
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.8);
   font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .hero__title {
   margin: 0 0 20px 0;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.1;
-  font-size: clamp(40px, 7vw, 72px);
-  color: rgba(255, 255, 255, 0.98);
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: clamp(48px, 8vw, 80px);
+  color: #ffffff;
+  /* 강렬한 3D 텍스트 섀도우 */
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.5),
+    0 12px 20px rgba(102, 51, 153, 0.4),
+    0 -1px 0 rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  animation: titleGlow 4s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.4),
+      0 8px 16px rgba(0, 0, 0, 0.5),
+      0 12px 20px rgba(102, 51, 153, 0.4),
+      0 -1px 0 rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.4),
+      0 8px 16px rgba(0, 0, 0, 0.5),
+      0 12px 20px rgba(102, 51, 153, 0.6),
+      0 -1px 0 rgba(0, 0, 0, 0.1);
+  }
 }
 
 .hero__subtitle {
@@ -96,8 +436,9 @@
   max-width: 65ch;
   font-size: clamp(16px, 1.5vw, 20px);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Meta Stats */
@@ -136,20 +477,99 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 24px;
   flex-wrap: wrap;
   margin-bottom: 60px;
 }
 
 .hero__buttons .btn {
-  padding: 16px 32px;
-  font-size: 15px;
+  padding: 16px 40px;
+  font-size: 16px;
   font-weight: 700;
   border-radius: 50px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
   transition: all 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  letter-spacing: 0.5px;
 }
 
+/* Primary Button - Strong Gradient */
+.hero__buttons .btn--primary-gradient {
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 30%,
+    #ec4899 70%,
+    #f97316 100%
+  );
+  color: white;
+  box-shadow: 
+    0 8px 20px rgba(102, 126, 234, 0.4),
+    0 4px 12px rgba(236, 72, 153, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__buttons .btn--primary-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.hero__buttons .btn--primary-gradient:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 12px 28px rgba(102, 126, 234, 0.6),
+    0 6px 16px rgba(236, 72, 153, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.hero__buttons .btn--primary-gradient:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Secondary Button - Subtle Glow */
+.hero__buttons .btn--secondary-glow {
+  background: linear-gradient(
+    135deg,
+    rgba(236, 72, 153, 0.2) 0%,
+    rgba(248, 113, 113, 0.15) 100%
+  );
+  color: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(236, 72, 153, 0.5);
+  box-shadow: 
+    0 0 20px rgba(236, 72, 153, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hero__buttons .btn--secondary-glow:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(236, 72, 153, 0.3) 0%,
+    rgba(248, 113, 113, 0.25) 100%
+  );
+  border-color: rgba(236, 72, 153, 0.7);
+  box-shadow: 
+    0 0 30px rgba(236, 72, 153, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.hero__buttons .btn--secondary-glow:active {
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Keep old button classes for compatibility */
 .hero__buttons .btn--primary {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -508,11 +928,77 @@
     flex-direction: column;
     width: 100%;
     padding: 0 20px;
+    gap: 12px;
   }
 
   .hero__buttons .btn {
     width: 100%;
     max-width: 300px;
+  }
+
+  /* 모바일에서 캐릭터 크기 조정 */
+  .hero__character--left {
+    width: clamp(180px, 30vw, 300px);
+    bottom: -60px;
+    left: -80px;
+  }
+
+  .hero__character--right {
+    width: clamp(120px, 20vw, 250px);
+    top: -60px;
+    right: -60px;
+  }
+
+  /* 모바일에서 장식 요소 조정 */
+  .hero__decoration--emoji {
+    font-size: clamp(16px, 3vw, 36px);
+  }
+
+  .left-emoji {
+    left: 5%;
+    top: 50%;
+  }
+
+  .right-emoji {
+    right: 3%;
+    top: 60%;
+  }
+
+  /* 하트 풍선 모바일 조정 */
+  .hero__heart-balloon {
+    width: clamp(32px, 6vw, 60px);
+    height: clamp(32px, 6vw, 60px);
+    font-size: clamp(16px, 3vw, 32px);
+  }
+
+  .heart-balloon-1 {
+    top: 18%;
+    right: 8%;
+  }
+
+  .heart-balloon-2 {
+    top: 25%;
+    right: 2%;
+  }
+
+  .heart-balloon-3 {
+    top: 14%;
+    right: 16%;
+  }
+
+  .heart-balloon-4 {
+    top: 58%;
+    right: 5%;
+  }
+
+  .heart-balloon-5 {
+    top: 66%;
+    right: 12%;
+  }
+
+  .heart-balloon-6 {
+    top: 52%;
+    right: 18%;
   }
 }
 
