@@ -222,7 +222,83 @@
   document.addEventListener("DOMContentLoaded", () => {
     const statsCards = document.querySelectorAll(".stat-card__number");
 
-    if (statsCards.length > 0) {
+    // ===== Emoji Item Copy (Most Used) =====
+    document.addEventListener("click", (e) => {
+      if (e.target.closest(".emoji-item")) {
+        const emojiSpan = e.target.closest(".emoji-item").querySelector(".emoji-item__emoji");
+        if (emojiSpan) {
+          const emoji = emojiSpan.textContent;
+          navigator.clipboard.writeText(emoji).then(() => {
+            showToast(`"${emoji}" 복사됨!`);
+          });
+        }
+      }
+    });
+
+    // ===== Generation Card Emoji Copy =====
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("generation-emoji")) {
+        const emoji = e.target.getAttribute("data-emoji");
+        if (emoji) {
+          navigator.clipboard.writeText(emoji).then(() => {
+            showToast(`"${emoji}" 복사됨!`);
+          });
+        }
+      }
+    });
+
+    // ===== Combination Card Copy Button =====
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("combination-card__copy-btn")) {
+        const btn = e.target;
+        const emojis = btn.getAttribute("data-emojis");
+        
+        if (!emojis) return;
+        
+        // 클립보드에 복사
+        navigator.clipboard.writeText(emojis).then(() => {
+          // 버튼 텍스트 변경
+          const originalText = btn.textContent;
+          btn.textContent = "✅ 복사됨!";
+          btn.style.pointerEvents = "none";
+          
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.pointerEvents = "auto";
+          }, 1500);
+          
+          // 토스트 메시지 표시
+          showToast(`"${emojis}" 복사됨!`);
+        }).catch(() => {
+          showToast("복사 실패. 다시 시도해주세요.");
+        });
+      }
+    });
+
+    function showToast(message) {
+      const toast = document.createElement("div");
+      toast.textContent = message;
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #667eea, #ec4899);
+        color: white;
+        padding: 16px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        animation: slideIn 0.3s ease-out;
+      `;
+      
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = "slideOut 0.3s ease-out";
+        setTimeout(() => toast.remove(), 300);
+      }, 1500);
+    }
       const observerOptions = {
         threshold: 0.5,
       };

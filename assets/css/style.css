@@ -639,10 +639,11 @@
   left: 0;
   right: 0;
   z-index: 40;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(10, 14, 39, 0.9) 0%, rgba(10, 14, 39, 0.85) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
 .site-header__inner {
@@ -683,10 +684,10 @@
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   padding: 10px 0;
-  opacity: 0.85;
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  opacity: 1;
+  transition: opacity var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
   cursor: pointer;
 }
 
@@ -1077,8 +1078,14 @@
 
 .features__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .features__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Feature Card */
@@ -1156,11 +1163,29 @@
   color: #b946ef;
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 4px 0;
+}
+
+.feature-card__link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #b946ef, #ec4899);
+  transition: width 0.3s ease;
 }
 
 .feature-card__link:hover {
   color: #ec4899;
+  transform: translateX(4px);
+}
+
+.feature-card__link:hover::after {
+  width: 100%;
 }
 
 /* ========== Most Used Section ========== */
