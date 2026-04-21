@@ -689,6 +689,8 @@
   opacity: 1;
   transition: opacity var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
   cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 .site-nav__link:hover,
@@ -836,6 +838,7 @@
 
   .site-nav__link {
     font-size: 13px;
+    white-space: nowrap;
   }
 
   .search-wrapper {
@@ -883,6 +886,7 @@
     width: 100%;
     text-align: left;
     font-size: 15px;
+    white-space: nowrap;
   }
 
   .site-nav__link::after {
@@ -1704,5 +1708,225 @@
 
   .generations__grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========== SEO Content Section ========== */
+.seo-content {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, transparent 0%, rgba(102, 126, 234, 0.03) 100%);
+}
+
+.seo-content__title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #333;
+  text-align: center;
+  margin: 0 0 50px 0;
+  line-height: 1.3;
+}
+
+.seo-content__summary {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.seo-content__summary p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #555;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.seo-content__nav {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.seo-content__nav h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #667eea;
+  margin: 0 0 20px 0;
+}
+
+.seo-content__nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.seo-content__nav li {
+  margin-bottom: 12px;
+}
+
+.seo-content__nav li:last-child {
+  margin-bottom: 0;
+}
+
+.seo-content__nav a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.seo-content__nav a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.seo-content__section {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  scroll-margin-top: 100px;
+}
+
+.seo-content__section h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 25px 0;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #667eea;
+}
+
+.seo-content__article {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.seo-content__article p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #555;
+  margin: 0 0 25px 0;
+  letter-spacing: 0.3px;
+}
+
+.seo-content__article p:last-of-type {
+  margin-bottom: 0;
+}
+
+.seo-content__article ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.seo-content__article li {
+  padding: 12px 0 12px 30px;
+  position: relative;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.seo-content__article li:last-child {
+  border-bottom: none;
+}
+
+.seo-content__article li:before {
+  content: "🔹";
+  position: absolute;
+  left: 0;
+  color: #667eea;
+}
+
+script[type="application/ld+json"] {
+  display: none;
+}
+
+/* Dark Mode for SEO Content */
+[data-theme="dark"] .seo-content__title {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .seo-content__summary {
+  background: #2a2a3e;
+  border-left-color: #667eea;
+}
+
+[data-theme="dark"] .seo-content__summary p {
+  color: #c0c0c0;
+}
+
+[data-theme="dark"] .seo-content__nav {
+  background: rgba(102, 126, 234, 0.08);
+  border-color: rgba(102, 126, 234, 0.15);
+}
+
+[data-theme="dark"] .seo-content__nav h2 {
+  color: #a8c5ff;
+}
+
+[data-theme="dark"] .seo-content__nav a {
+  color: #a8c5ff;
+}
+
+[data-theme="dark"] .seo-content__nav a:hover {
+  color: #c5d9ff;
+}
+
+[data-theme="dark"] .seo-content__section h2 {
+  color: #e0e0e0;
+  border-bottom-color: #667eea;
+}
+
+[data-theme="dark"] .seo-content__article {
+  background: #333349;
+}
+
+[data-theme="dark"] .seo-content__article p {
+  color: #c0c0c0;
+}
+
+[data-theme="dark"] .seo-content__article li {
+  color: #c0c0c0;
+  border-bottom-color: #3a3a4e;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .seo-content {
+    padding: 60px 15px;
+  }
+
+  .seo-content__title {
+    font-size: 1.6rem;
+    margin-bottom: 40px;
+  }
+
+  .seo-content__summary,
+  .seo-content__nav,
+  .seo-content__article {
+    padding: 20px;
+  }
+
+  .seo-content__section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+
+  .seo-content__article li {
+    padding: 10px 0 10px 25px;
+    font-size: 0.9rem;
   }
 }
