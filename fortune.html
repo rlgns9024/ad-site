@@ -3,11 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>이모지 감정 운세 - EmojiRibbit</title>
+    <title>이모지 운세 - EmojiRibbit 🍿</title>
     <meta
       name="description"
-      content="지금 내 감정을 이모지로 선택하면 오늘의 운세와 메시지를 알려드려요."
+      content="지금 내 감정으로 보는 이모지 운세! 나의 감정을 나타내는 이모지를 선택하고 오늘의 운세를 확인하세요."
     />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/icon/favicon.ico" />
+    <link rel="icon" type="image/png" href="assets/images/icon/favicon.png" />
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -15,7 +19,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="assets/css/commons.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/subpage.css" />
+    <link rel="stylesheet" href="assets/css/interactions.css" />
+    <link rel="stylesheet" href="assets/css/fortune.css" />
   </head>
 
   <body>
@@ -36,13 +41,27 @@
             <a href="copy-tool.html" class="site-nav__link" aria-label="복사 도구">
               📋 복사 도구
             </a>
-            <a href="trends.html" class="site-nav__link" aria-label="세대별 트렌드">
-              🧬 세대별 트렌드
+            <a href="hashtags.html" class="site-nav__link" aria-label="해시태그 모음집">
+              #️⃣ 해시태그 모음집
             </a>
-            <a href="fortune.html" class="site-nav__link active" aria-label="이모지 운세">
+            <a href="decofont.html" class="site-nav__link" aria-label="데코폰트">
+              ✨ 데코폰트
+            </a>
+            <a href="fortune.html" class="site-nav__link site-nav__link--active" aria-label="이모지 운세">
               🔮 이모지 운세
             </a>
           </nav>
+
+          <!-- Search Bar (Desktop) -->
+          <div class="search-wrapper" role="search">
+            <input
+              type="search"
+              class="search-input"
+              placeholder="검색... (예: 하트, 동물)"
+              aria-label="이모지 및 특수문자 검색"
+            />
+            <button class="search-btn" aria-label="검색 버튼">🔍</button>
+          </div>
 
           <!-- Dark Mode Toggle -->
           <button
@@ -69,149 +88,133 @@
       </div>
     </header>
 
-    <!-- Breadcrumb -->
-    <section class="breadcrumb-section">
-      <div class="container">
-        <div class="breadcrumb">
-          <a href="index.html" class="breadcrumb__link">홈</a>
-          <span class="breadcrumb__separator">/</span>
-          <span class="breadcrumb__current">이모지 감정 운세</span>
-        </div>
-      </div>
-    </section>
+    <!-- Fortune Hero Section -->
+    <section class="fortune-hero">
+      <div class="fortune-hero__overlay"></div>
 
-    <!-- Page Hero Section -->
-    <section class="page-hero fortune-hero">
-      <div class="page-hero__content" data-aos="fade-up">
-        <h1 class="page-hero__title">🔮 이모지 감정 운세</h1>
-        <p class="page-hero__subtitle">
-          지금 내 감정을 이모지로 선택하면 오늘의 운세와 메시지를 알려드려요.
-        </p>
-      </div>
-    </section>
-
-    <!-- Fortune Content -->
-    <section class="fortune-section">
       <div class="container">
-        <div class="fortune-intro" data-aos="fade-up">
-          <p class="fortune-intro__text">
-            현재 당신의 기분과 감정에 가장 가까운 이모지를 선택해주세요.
+        <div class="fortune-hero__content">
+          <!-- Step Indicator -->
+          <div class="fortune-steps">
+            <div class="fortune-step">
+              <span class="fortune-step__number">1</span>
+              <span class="fortune-step__label">감정 선택</span>
+            </div>
+            <div class="fortune-step__line"></div>
+            <div class="fortune-step">
+              <span class="fortune-step__number">2</span>
+              <span class="fortune-step__label">운세 확인</span>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <h1 class="fortune-hero__title" data-aos="fade-up" data-aos-delay="100">
+            이모지 운세
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="fortune-hero__subtitle" data-aos="fade-up" data-aos-delay="200">
+            현재 내 감정과 가장 가까운 이모지를 선택하면<br />
+            오늘의 운세를 알려드려요.
           </p>
         </div>
+      </div>
+    </section>
 
-        <!-- Emotion Selection -->
-        <div class="emotion-selector" data-aos="fade-up" data-aos-delay="100">
-          <div class="emotion-buttons">
-            <button class="emotion-btn wow bounceIn" data-emotion="happy">
-              <span class="emotion-btn__emoji">😊</span>
-              <span class="emotion-btn__label">행복</span>
-            </button>
-            <button class="emotion-btn wow bounceIn" data-emotion="sad">
-              <span class="emotion-btn__emoji">😢</span>
-              <span class="emotion-btn__label">슬픔</span>
-            </button>
-            <button class="emotion-btn wow bounceIn" data-emotion="excited">
-              <span class="emotion-btn__emoji">😍</span>
-              <span class="emotion-btn__label">설렘</span>
-            </button>
-            <button class="emotion-btn wow bounceIn" data-emotion="tired">
-              <span class="emotion-btn__emoji">😴</span>
-              <span class="emotion-btn__label">피곤</span>
-            </button>
-            <button class="emotion-btn wow bounceIn" data-emotion="angry">
-              <span class="emotion-btn__emoji">😡</span>
-              <span class="emotion-btn__label">화남</span>
-            </button>
-            <button class="emotion-btn wow bounceIn" data-emotion="confused">
-              <span class="emotion-btn__emoji">🤔</span>
-              <span class="emotion-btn__label">혼란</span>
-            </button>
-            <button class="emotion-btn wow bounceIn" data-emotion="cool">
-              <span class="emotion-btn__emoji">😎</span>
-              <span class="emotion-btn__label">멋짐</span>
-            </button>
-            <button class="emotion-btn wow bounceIn" data-emotion="love">
-              <span class="emotion-btn__emoji">💕</span>
-              <span class="emotion-btn__label">사랑</span>
+    <!-- Fortune Main Section -->
+    <section class="fortune-main" id="fortune-main">
+      <div class="container">
+        <!-- Mood Selection Section (visible initially) -->
+        <div class="fortune-mood-section" id="fortune-mood-section">
+          <h2 class="fortune-mood-title">지금 내 감정은?</h2>
+
+          <div class="fortune-mood-grid" id="fortune-mood-grid">
+            <!-- Mood buttons populated by JavaScript -->
+          </div>
+
+          <!-- Selected Mood Display -->
+          <div class="fortune-selected-mood" id="fortune-selected-mood" style="display: none;">
+            <p class="fortune-selected-mood-text">
+              선택된 감정: <span id="selected-mood-emoji"></span> <span id="selected-mood-label"></span>
+            </p>
+          </div>
+
+          <!-- Get Fortune Button -->
+          <div class="fortune-button-wrapper">
+            <button class="btn btn--primary-gradient fortune-btn" id="get-fortune-btn">
+              운세 보기
             </button>
           </div>
         </div>
 
-        <!-- Fortune Result (Hidden until selection) -->
-        <div class="fortune-result hidden" id="fortuneResult" data-aos="zoom-in">
-          <div class="fortune-result__header">
-            <h2 class="fortune-result__title">오늘의 운세</h2>
-            <button class="fortune-result__close" id="closeResult">×</button>
+        <!-- Loading State (hidden initially) -->
+        <div class="fortune-loading" id="fortune-loading" style="display: none;">
+          <div class="fortune-loading__spinner">
+            <div class="fortune-spinner"></div>
+          </div>
+          <p class="fortune-loading__text">별자리와 이모지를 분석하는 중...</p>
+        </div>
+
+        <!-- Result Section (hidden initially) -->
+        <div class="fortune-result" id="fortune-result" style="display: none;">
+          <!-- Result Cards -->
+          <div class="fortune-result-cards">
+            <!-- Message Card -->
+            <div class="fortune-result-card fortune-message-card">
+              <div class="fortune-result-card__label">오늘의 한마디</div>
+              <p class="fortune-result-card__content" id="fortune-message"></p>
+            </div>
+
+            <!-- Advice Card -->
+            <div class="fortune-result-card fortune-advice-card">
+              <div class="fortune-result-card__label">오늘의 조언</div>
+              <p class="fortune-result-card__content" id="fortune-advice"></p>
+            </div>
           </div>
 
-          <div class="fortune-result__content">
-            <div class="fortune-result__emoji" id="resultEmoji">😊</div>
-            
-            <div class="fortune-result__message">
-              <h3 class="fortune-result__emotion-name" id="resultEmotion">행복</h3>
-              <p class="fortune-result__quote" id="resultQuote">
-                "오늘은 모든 것이 순조롭게 흘러갈 하루입니다. 긍정적인 마음으로 시작하세요."
-              </p>
-            </div>
+          <!-- Result Action Buttons -->
+          <div class="fortune-result-actions">
+            <button class="btn btn--secondary" id="copy-fortune-btn">
+              📋 운세 복사
+            </button>
+            <button class="btn btn--outline" id="reset-fortune-btn">
+              🔄 다시 선택
+            </button>
+            <a href="dictionary.html" class="btn btn--secondary-glow">
+              📖 이모지 사전 보기
+            </a>
+          </div>
+        </div>
 
-            <div class="fortune-result__details">
-              <div class="fortune-detail">
-                <span class="fortune-detail__label">운세:</span>
-                <span class="fortune-detail__value" id="fortuneText">대길</span>
-              </div>
-              <div class="fortune-detail">
-                <span class="fortune-detail__label">행운의 색:</span>
-                <span class="fortune-detail__value" id="luckyColor">보라색</span>
-              </div>
-              <div class="fortune-detail">
-                <span class="fortune-detail__label">행운의 숫자:</span>
-                <span class="fortune-detail__value" id="luckyNumber">7</span>
-              </div>
-            </div>
-
-            <div class="fortune-result__advice">
-              <h4 class="fortune-result__advice-title">오늘의 조언</h4>
-              <p class="fortune-result__advice-text" id="adviceText">
-                주변 사람들과의 소통을 소중히 여기고, 작은 행복들을 감사함으로 받아들이세요.
-              </p>
-            </div>
-
-            <button class="btn btn--primary-gradient" id="retryBtn">
-              다시 선택하기
+        <!-- Share Section (shown after result) -->
+        <div class="fortune-share" id="fortune-share" style="display: none;">
+          <h3 class="fortune-share__title">친구에게 공유하기</h3>
+          <div class="fortune-share__card">
+            <p class="fortune-share__text">
+              "오늘의 이모지 운세를 함께 확인해보세요! 🔮"
+            </p>
+            <button class="btn btn--secondary fortune-share-copy-btn" id="share-copy-btn">
+              공유 텍스트 복사
             </button>
           </div>
         </div>
 
-        <!-- FAQ Section -->
-        <div class="fortune-faq" data-aos="fade-up" data-aos-delay="200">
-          <h2 class="fortune-faq__title">자주 묻는 질문</h2>
-          
-          <div class="faq-items">
-            <div class="faq-item wow fadeInUp">
-              <h3 class="faq-item__q">💡 운세는 매일 바뀌나요?</h3>
-              <p class="faq-item__a">네, 새로운 날이 시작되면 운세도 함께 바뀝니다. 매일 새로운 운세를 확인해보세요.</p>
-            </div>
-
-            <div class="faq-item wow fadeInUp">
-              <h3 class="faq-item__q">💡 정확한 운세인가요?</h3>
-              <p class="faq-item__a">
-                이는 재미있는 감정 표현 도구일 뿐입니다. 심각하게 받아들이기보다는 즐거운 마음으로 즐겨주세요!
-              </p>
-            </div>
-
-            <div class="faq-item wow fadeInUp">
-              <h3 class="faq-item__q">💡 여러 번 해볼 수 있나요?</h3>
-              <p class="faq-item__a">물론입니다! 원하는 만큼 반복해서 즐길 수 있습니다. 다양한 감정으로 시도해보세요.</p>
-            </div>
-
-            <div class="faq-item wow fadeInUp">
-              <h3 class="faq-item__q">💡 운세를 공유할 수 있나요?</h3>
-              <p class="faq-item__a">
-                결과 화면을 캡처하거나 스크린샷으로 친구들과 공유할 수 있습니다. 함께 웃어요!
-              </p>
-            </div>
-          </div>
+        <!-- Try Again Section -->
+        <div class="fortune-try-again" id="fortune-try-again" style="display: none;">
+          <p class="fortune-try-again__text">다른 감정으로 다시 볼까요?</p>
+          <button class="btn btn--outline" id="try-again-btn">
+            다시 선택하기
+          </button>
         </div>
+      </div>
+    </section>
+
+    <!-- Disclaimer Section -->
+    <section class="fortune-disclaimer">
+      <div class="container">
+        <p class="fortune-disclaimer__text">
+          ✨ 본 운세는 재미로만 즐기세요
+        </p>
       </div>
     </section>
 
@@ -264,11 +267,10 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow.js/1.8.5/wow.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/page-transition.js"></script>
-    <script src="assets/js/pages/fortune.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/fortune.js"></script>
   </body>
 </html>

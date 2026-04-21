@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>복사 도구 - EmojiRibbit 🍿</title>
+    <title>데코폰트 - EmojiRibbit ✨</title>
     <meta
       name="description"
-      content="카테고리별로 이모지를 선택해서 한번에 복사하세요. 감정, 음식, MBTI, 직업 등 다양한 이모지 세트를 제공합니다."
+      content="글자 위에 특수문자를 결합해 특별한 텍스트를 만들 수 있어요. 다양한 장식 스타일 중에서 선택해서 바로 복사하세요."
     />
 
     <!-- Favicon -->
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="assets/css/commons.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/interactions.css" />
-    <link rel="stylesheet" href="assets/css/copy-tool.css" />
+    <link rel="stylesheet" href="assets/css/decofont.css" />
   </head>
 
   <body>
@@ -38,13 +38,13 @@
             <a href="dictionary.html" class="site-nav__link" aria-label="이모지 사전">
               📖 이모지 사전
             </a>
-            <a href="copy-tool.html" class="site-nav__link site-nav__link--active" aria-label="복사 도구">
+            <a href="copy-tool.html" class="site-nav__link" aria-label="복사 도구">
               📋 복사 도구
             </a>
             <a href="hashtags.html" class="site-nav__link" aria-label="해시태그 모음집">
               #️⃣ 해시태그 모음집
             </a>
-            <a href="decofont.html" class="site-nav__link" aria-label="데코폰트">
+            <a href="decofont.html" class="site-nav__link site-nav__link--active" aria-label="데코폰트">
               ✨ 데코폰트
             </a>
             <a href="fortune.html" class="site-nav__link" aria-label="이모지 운세">
@@ -88,94 +88,87 @@
       </div>
     </header>
 
-    <!-- Copy Tool Main -->
-    <section class="copy-tool-main">
+    <!-- Decofont Intro Section -->
+    <section class="decofont-intro">
       <div class="container">
-        <!-- Title Section -->
-        <div class="copy-tool-title-section">
-          <h1 class="copy-tool-title">📋 복사 도구</h1>
-          <p class="copy-tool-subtitle">카테고리별 이모지를 선택해서 한번에 복사하세요!</p>
+        <div class="decofont-intro__content">
+          <h1 class="decofont-intro__title">데코폰트</h1>
+          <p class="decofont-intro__subtitle">
+            글자 위에 다양한 특수문자를 결합해<br />
+            특별한 텍스트를 만들 수 있어요.
+          </p>
+          <p class="decofont-intro__description">
+            원하는 문장을 입력하고 장식 스타일을 골라 바로 복사해보세요.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Decofont Main Section -->
+    <section class="decofont-main" id="decofont-main">
+      <div class="container">
+        
+        <!-- Text Input Area -->
+        <div class="decofont-input-card">
+          <h2 class="decofont-input-card__title">텍스트 입력</h2>
+          <textarea
+            id="decofont-input"
+            class="decofont-input-field"
+            placeholder="꾸미고 싶은 문장을 입력하세요"
+            aria-label="데코폰트 입력 필드"
+            rows="3"
+          ></textarea>
+          <p class="decofont-input-hint">한국어, 영어, 숫자 모두 가능합니다.</p>
         </div>
 
-        <!-- Content Wrapper -->
-        <div class="copy-tool-wrapper">
-          <!-- Sidebar Categories -->
-          <aside class="copy-tool-sidebar">
-            <div class="category-list">
-              <button class="category-btn category-btn--active" data-category="emotion">
-                😊 감정·표현
-              </button>
-              <button class="category-btn" data-category="food">
-                🍔 음식·음료
-              </button>
-              <button class="category-btn" data-category="mbti">
-                💅 MBTI별
-              </button>
-              <button class="category-btn" data-category="job">
-                💼 직업·일무
-              </button>
-              <button class="category-btn" data-category="travel">
-                ✈️ 여행·종기
-              </button>
-              <button class="category-btn" data-category="celebration">
-                🎉 축하·기념일
-              </button>
-            </div>
-          </aside>
-
-          <!-- Emoji Grid -->
-          <main class="copy-tool-content">
-            <!-- Category Title -->
-            <div class="emoji-category-header">
-              <h2 id="category-title" class="emoji-category-title">😊 감정·표현</h2>
-              <p id="category-desc" class="emoji-category-desc">선택한 카테고리의 이모지들입니다.</p>
-            </div>
-
-            <!-- Emoji Grid Display -->
-            <div id="emoji-grid" class="emoji-grid-container">
-              <!-- Populated by JavaScript -->
-            </div>
-          </main>
+        <!-- Decoration Styles List -->
+        <div class="decofont-styles-card">
+          <h2 class="decofont-styles-card__title">장식 스타일 선택</h2>
+          <p class="decofont-styles-card__subtitle">원하는 스타일을 클릭해서 선택하세요</p>
+          
+          <div class="decofont-styles-grid" id="decofont-styles-grid">
+            <!-- Styles will be populated by JavaScript -->
+          </div>
         </div>
 
-        <!-- Custom Emoji Combination Section -->
-        <section class="custom-combination-section">
-          <div class="custom-header">
-            <h2 class="custom-title">✏️ 나만의 이모지 조합 만들기</h2>
-            <p class="custom-subtitle">아래 이모지를 클릭하면 내 조합에 추가됩니다.</p>
+        <!-- Convert Button -->
+        <div class="decofont-action-area">
+          <button class="btn btn--primary-gradient decofont-convert-btn" id="decofont-convert-btn">
+            ✨ 변환하기
+          </button>
+        </div>
+
+        <!-- Result Area -->
+        <div class="decofont-result-card" id="decofont-result-card">
+          <h2 class="decofont-result-card__title">변환 결과를 확인해 보세요!</h2>
+          
+          <div class="decofont-result-box" id="decofont-result-box">
+            <p class="decofont-result-empty">아직 결과가 없습니다. 텍스트를 입력하고 변환해보세요.</p>
           </div>
 
-          <!-- Custom Input -->
-          <div class="custom-input-wrapper">
-            <input
-              type="text"
-              id="custom-input"
-              class="custom-input"
-              placeholder="이모지를 클릭하거나 직접 입력하세요..."
-            />
-            <button id="custom-clear-btn" class="btn btn--secondary custom-clear-btn">
-              🗑️ 초기화
+          <div class="decofont-result-actions">
+            <button class="btn btn--secondary decofont-reset-btn" id="decofont-reset-btn" disabled>
+              🔄 초기화
+            </button>
+            <button class="btn btn--primary-gradient decofont-copy-btn" id="decofont-copy-btn" disabled>
+              📋 복사
             </button>
           </div>
+        </div>
 
-          <!-- Action Buttons -->
-          <div class="custom-actions">
-            <button id="custom-copy-btn" class="btn btn--primary-gradient custom-copy-btn">
-              📋 조합 복사
-            </button>
-            <button id="custom-save-btn" class="btn btn--secondary custom-save-btn">
-              💾 저장하기
-            </button>
-          </div>
+        <!-- Usage Tips -->
+        <div class="decofont-tips-card">
+          <h2 class="decofont-tips-card__title">사용 팁</h2>
+          <ul class="decofont-tips-list">
+            <li>변환할 텍스트를 입력하세요.</li>
+            <li>장식 스타일 중 원하는 것을 선택하고 "변환하기" 버튼을 누르세요.</li>
+            <li>복사 후 SNS, 메신저, 블로그 등 원하는 곳에 붙여 넣어 사용하세요.</li>
+            <li>일부 장식 문자는 기기나 브라우저에 따라 다르게 보일 수 있어요.</li>
+            <li>영어 소문자에서 더 자연스럽게 보일 수 있어요.</li>
+            <li>너무 많은 장식을 겹치면 텍스트가 보이기 어려울 수 있습니다.</li>
+          </ul>
+        </div>
 
-          <!-- Quick Emoji Suggestions -->
-          <div class="quick-emojis">
-            <p class="quick-emojis-label">자주 쓰는 이모지:</p>
-            <div id="quick-emoji-list" class="quick-emoji-buttons">
-              <!-- Populated by JavaScript -->
-            </div>
-          </div>
-        </section>
       </div>
     </section>
 
@@ -186,7 +179,7 @@
           <div class="site-footer__section">
             <div class="site-footer__logo">🐸 EmojiRibbit</div>
             <p class="site-footer__description">
-              세상의 모든 이모지를 한 곳에서. 의미 사전, 복사 도구, 세대별 트렌드, 이모지 운세까지 완전 무료.
+              세상의 모든 이모지를 한 곳에서. 의미 사전, 복사 도구, 해시태그 모음집, 데코폰트, 이모지 운세까지 완전 무료.
             </p>
           </div>
 
@@ -195,8 +188,9 @@
             <ul class="site-footer__list">
               <li><a href="dictionary.html">이모지 사전</a></li>
               <li><a href="copy-tool.html">복사 도구</a></li>
+              <li><a href="hashtags.html">해시태그 모음집</a></li>
+              <li><a href="decofont.html">데코폰트</a></li>
               <li><a href="fortune.html">이모지 운세</a></li>
-              <li><a href="trends.html">세대별 트렌드</a></li>
             </ul>
           </div>
 
@@ -231,10 +225,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow.js/1.8.5/wow.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/sections/hero.js"></script>
     <script src="assets/js/common.js"></script>
-    <script src="assets/js/copy-tool.js"></script>
+    <script src="assets/js/decofont.js"></script>
   </body>
 </html>
