@@ -48,7 +48,7 @@
 
 /* Main Section */
 .hashtags-main {
-  padding: 40px 20px 120px;
+  padding: 40px 20px 140px;
   min-height: calc(100vh - 300px);
 }
 
@@ -128,7 +128,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   padding: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   transition: all 0.3s ease;
 }
 
@@ -157,27 +157,10 @@
   color: #fff;
 }
 
-.hashtag-copy-btn {
-  padding: 10px 20px;
-  background: #667eea;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.hashtag-copy-btn:hover {
-  background: #5568d3;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
 @media (max-width: 768px) {
   .hashtag-card {
     padding: 20px;
+    margin-bottom: 25px;
   }
   
   .hashtag-card__header {
@@ -187,11 +170,6 @@
   
   .hashtag-card__title {
     font-size: 1.2rem;
-  }
-  
-  .hashtag-copy-btn {
-    width: 100%;
-    text-align: center;
   }
 }
 
@@ -285,6 +263,119 @@
   color: #888;
 }
 
+/* ========== Custom Input Section ========== */
+.hashtag-custom-input-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  margin-bottom: 30px;
+  border: 2px solid #667eea;
+}
+
+[data-theme="dark"] .hashtag-custom-input-card {
+  background: #1a1a1a;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  border-color: #764ba2;
+}
+
+.hashtag-custom-input-card__header {
+  margin-bottom: 20px;
+}
+
+.hashtag-custom-input-card__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+[data-theme="dark"] .hashtag-custom-input-card__title {
+  color: #fff;
+}
+
+.hashtag-custom-input-card__subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+[data-theme="dark"] .hashtag-custom-input-card__subtitle {
+  color: #aaa;
+}
+
+.hashtag-custom-input-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.custom-input-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.custom-tag-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: white;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .custom-tag-input {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.custom-tag-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+[data-theme="dark"] .custom-tag-input:focus {
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+}
+
+.custom-add-btn {
+  padding: 12px 24px;
+  white-space: nowrap;
+  align-self: center;
+}
+
+.custom-input-hint {
+  font-size: 0.8rem;
+  color: #999;
+  margin: 0;
+  text-align: center;
+}
+
+[data-theme="dark"] .custom-input-hint {
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .hashtag-custom-input-card {
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+
+  .custom-input-wrapper {
+    flex-direction: column;
+  }
+
+  .custom-add-btn {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
 /* Bottom Selection Bar */
 .hashtag-bottom-bar {
   position: fixed;
@@ -331,38 +422,13 @@
   max-height: 60px;
   overflow-y: auto;
   font-family: 'Courier New', monospace;
+  line-height: 1.4;
 }
 
 [data-theme="dark"] .hashtag-bottom-bar__selected {
   background: #2a2a2a;
   border-color: #444;
   color: #e0e0e0;
-}
-
-/* Bottom Bar Input - For editing selected tags */
-.hashtag-bottom-bar__input {
-  flex: 1;
-  min-width: 200px;
-  padding: 10px 15px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-family: 'Courier New', monospace;
-  resize: none;
-  background: white;
-  color: #333;
-}
-
-[data-theme="dark"] .hashtag-bottom-bar__input {
-  background: #2a2a2a;
-  border-color: #444;
-  color: #e0e0e0;
-}
-
-.hashtag-bottom-bar__input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .hashtag-bottom-bar__actions {
@@ -423,8 +489,7 @@
     gap: 10px;
   }
   
-  .hashtag-bottom-bar__selected,
-  .hashtag-bottom-bar__input {
+  .hashtag-bottom-bar__selected {
     width: 100%;
     min-width: unset;
   }
@@ -470,6 +535,10 @@
   background: #f44336;
 }
 
+.toast--warning {
+  background: #ff9800;
+}
+
 @keyframes slideUp {
   from {
     transform: translateY(100%);
@@ -492,11 +561,12 @@
 
 /* Adjust main content for bottom bar */
 .hashtags-main {
-  padding-bottom: 120px;
+  padding-bottom: 140px;
 }
 
 @media (max-width: 768px) {
   .hashtags-main {
-    padding-bottom: 140px;
+    padding-bottom: 160px;
   }
 }
+

@@ -1,7 +1,8 @@
 /**
- * Hashtags Page Logic
+ * Hashtags Page Logic - With Custom Tag Input
  * - Category tabs with hashtag data
  * - Individual hashtag selection (pills)
+ * - Custom tag input and addition
  * - Bottom fixed selection bar
  * - Copy, reset, edit, delete functionality
  */
@@ -104,6 +105,7 @@ $(document).ready(function() {
     renderInitialHashtags();
     bindCategoryTabs();
     bindHashtagSelection();
+    bindCustomTagInput();
     bindBottomBar();
     initializeBottomBar();
   }
@@ -160,21 +162,15 @@ $(document).ready(function() {
     $('.hashtag-tab').on('click', function() {
       const category = $(this).data('category');
       
-      // Update UI state
       uiState.currentCategory = category;
       
-      // Update active tab
       $('.hashtag-tab').removeClass('hashtag-tab--active');
       $(this).addClass('hashtag-tab--active');
       
-      // Render hashtags for this category
       updateHashtagList(category);
       updateCategoryTitle(category);
-      
-      // Rebind selection events
       bindHashtagSelection();
       
-      // Scroll to hashtag list
       $('html, body').animate({
         scrollTop: $('#hashtags-main').offset().top - 100
       }, 300);
@@ -187,21 +183,75 @@ $(document).ready(function() {
   function bindHashtagSelection() {
     $('.hashtag-pill').off('click').on('click', function() {
       const tag = $(this).data('tag');
-      
-      // Toggle selection
-      if (uiState.selectedTags.includes(tag)) {
-        uiState.selectedTags = uiState.selectedTags.filter(t => t !== tag);
-        $(this).removeClass('hashtag-pill--selected');
-      } else {
-        uiState.selectedTags.push(tag);
-        $(this).addClass('hashtag-pill--selected');
-      }
-      
-      // Update bottom bar
-      syncSelectedBar();
-      
-      showToast(`${tag} ${uiState.selectedTags.includes(tag) ? '선택됨' : '선택 해제됨'}`);
+      toggleTagSelection(tag);
     });
+  }
+
+  function toggleTagSelection(tag) {
+    if (uiState.selectedTags.includes(tag)) {
+      uiState.selectedTags = uiState.selectedTags.filter(t => t !== tag);
+      $(`.hashtag-pill[data-tag="${tag}"]`).removeClass('hashtag-pill--selected');
+      showToast(`${tag} 선택 해제됨`, 'info');
+    } else {
+      uiState.selectedTags.push(tag);
+      $(`.hashtag-pill[data-tag="${tag}"]`).addClass('hashtag-pill--selected');
+      showToast(`${tag} 선택됨`, 'success');
+    }
+    
+    syncSelectedBar();
+  }
+
+  // ========================================
+  // CUSTOM TAG INPUT BINDING
+  // ========================================
+  function bindCustomTagInput() {
+    const input = $('#custom-tag-input');
+    const addBtn = $('#custom-tag-add-btn');
+    
+    // Enter key
+    input.on('keypress', function(e) {
+      if (e.which === 13) {
+        e.preventDefault();
+        addCustomTag();
+      }
+    });
+    
+    // Add button
+    addBtn.on('click', function() {
+      addCustomTag();
+    });
+  }
+
+  function addCustomTag() {
+    const input = $('#custom-tag-input');
+    let tagValue = input.val().trim();
+    
+    // Validate
+    if (!tagValue) {
+      showToast('해시태그를 입력해주세요.', 'warning');
+      return;
+    }
+    
+    // Normalize: Add # if not present
+    if (!tagValue.startsWith('#')) {
+      tagValue = '#' + tagValue;
+    }
+    
+    // Check for duplicates
+    if (uiState.selectedTags.includes(tagValue)) {
+      showToast(`${tagValue}은(는) 이미 추가되었습니다.`, 'warning');
+      return;
+    }
+    
+    // Add to selected tags
+    uiState.selectedTags.push(tagValue);
+    syncSelectedBar();
+    
+    // Clear input
+    input.val('');
+    input.focus();
+    
+    showToast(`${tagValue} 추가됨`, 'success');
   }
 
   // ========================================
@@ -217,7 +267,7 @@ $(document).ready(function() {
     
     if (uiState.selectedTags.length === 0) {
       bar.addClass('hashtag-bottom-bar--empty');
-      selectedContainer.text('');
+      selectedContainer.text('선택된 해시태그가 없습니다.');
     } else {
       bar.removeClass('hashtag-bottom-bar--empty');
       const tagString = uiState.selectedTags.join(' ');
@@ -245,7 +295,6 @@ $(document).ready(function() {
         return;
       }
       
-      // Clear selected tags
       uiState.selectedTags = [];
       
       // Update UI

@@ -91,8 +91,9 @@
         <div class="hashtag-intro__content">
           <h1 class="hashtag-intro__title">해시태그 모음집</h1>
           <p class="hashtag-intro__subtitle">
-            인기 소셜 해시태그를 주제별로 모아두었어요.<br />
-            원하는 주제를 선택하고 한 번에 복사해보세요.
+            원하는 해시태그를 하나씩 선택하고,<br />
+            직접 입력해서 나만의 조합을 만들어보세요.<br />
+            선택한 해시태그는 아래에서 바로 복사할 수 있어요.
           </p>
         </div>
       </div>
@@ -147,9 +148,33 @@
             </p>
           </div>
 
-          <!-- Individual Hashtag Selection (Optional) -->
+          <!-- Individual Hashtag Selection -->
           <div class="hashtag-card__footer">
             <p class="hashtag-card__hint">해시태그를 클릭하면 아래 선택창에 추가됩니다.</p>
+          </div>
+        </div>
+
+        <!-- Custom Tag Input Section -->
+        <div class="hashtag-custom-input-card">
+          <div class="hashtag-custom-input-card__header">
+            <h3 class="hashtag-custom-input-card__title">직접 입력으로 해시태그 추가</h3>
+            <p class="hashtag-custom-input-card__subtitle">나만의 해시태그를 입력해서 추가하세요</p>
+          </div>
+          
+          <div class="hashtag-custom-input-card__body">
+            <div class="custom-input-wrapper">
+              <input 
+                type="text" 
+                id="custom-tag-input" 
+                class="custom-tag-input" 
+                placeholder="예: 운동하는직장인 (# 자동 추가됨)"
+                aria-label="해시태그 직접 입력"
+              />
+              <button class="btn btn--primary-gradient custom-add-btn" id="custom-tag-add-btn">
+                ➕ 추가
+              </button>
+            </div>
+            <p class="custom-input-hint">엔터키를 입력해도 추가됩니다</p>
           </div>
         </div>
       </div>
