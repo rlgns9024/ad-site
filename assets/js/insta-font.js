@@ -132,21 +132,26 @@ function convertWithMap(text, map) {
 // Render Results
 function renderFontResults() {
   const resultsContainer = $("#insta-font-results");
+  const emptyState = $("#insta-font-empty-state");
   resultsContainer.empty();
 
   if (uiState.results.length === 0) {
-    updateEmptyState();
+    resultsContainer.hide();
+    emptyState.show();
     return;
   }
 
-  $("#insta-font-empty-state").hide();
+  // 핵심 수정: 결과 컨테이너 반드시 show() 처리
+  emptyState.hide();
+  resultsContainer.show();
 
   uiState.results.forEach((result) => {
     const card = createResultCard(result);
     resultsContainer.append(card);
   });
 
-  $(".insta-font-result-card").on("click", function() {
+  // 이벤트 재연결 - off() 추가하여 중복 이벤트 방지
+  $(".insta-font-result-card").off("click").on("click", function() {
     const resultText = $(this).find(".insta-font-result-text").text();
     copyFontResult(resultText);
   });
@@ -209,11 +214,11 @@ function updateEmptyState() {
   const emptyState = $("#insta-font-empty-state");
 
   if (uiState.results.length === 0) {
-    resultsContainer.hide();
     emptyState.show();
+    resultsContainer.hide();
   } else {
-    resultsContainer.show();
     emptyState.hide();
+    resultsContainer.show();
   }
 }
 
